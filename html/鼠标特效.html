@@ -26,7 +26,7 @@
         radial-gradient(circle at 80% 80%, #021a60 0%, transparent 55%),
         linear-gradient(135deg, #032690 0%, #021a60 100%);
       color: #fff;
-      cursor: url('cursor.png') 0 0, auto;
+      cursor: url('cursor4.png') 0 0, auto;
     }
 
     /* 特效画布：覆盖全屏，置底 */
@@ -233,9 +233,9 @@
           if (p.life <= 0) { this.particles.splice(i, 1); continue; }
           const r = p.size * p.life;
           const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 4);
-          g.addColorStop(0, `hsla(${p.hue}, 100%, 55%, ${p.life * 0.5})`);
-          g.addColorStop(0.4, `hsla(${p.hue}, 100%, 45%, ${p.life * 0.25})`);
-          g.addColorStop(1, `hsla(${p.hue}, 100%, 40%, 0)`);
+          g.addColorStop(0, `hsla(${p.hue}, 100%, 40%, ${p.life * 0.3})`);
+          g.addColorStop(0.4, `hsla(${p.hue}, 100%, 35%, ${p.life * 0.15})`);
+          g.addColorStop(1, `hsla(${p.hue}, 100%, 30%, 0)`);
           ctx.fillStyle = g;
           ctx.beginPath();
           ctx.arc(p.x, p.y, r * 4, 0, TAU);
