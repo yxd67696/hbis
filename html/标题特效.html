@@ -1,0 +1,824 @@
+<!--
+ * @name: 标题特效
+ * @description: 首页模块标题的 20 种精美鼠标滑入特效（默认+悬停双重设计）
+ * @lastEditors: Francis
+ * @date: Do not edit
+ * @lastEditTime: Do not edit
+ * @filePath: Do not edit
+-->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>标题特效</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      padding: 48px 40px;
+      background: #f3f6fd;
+      font-family: "Microsoft YaHei", -apple-system, "Segoe UI", sans-serif;
+    }
+
+    .page-head {
+      max-width: 1100px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+    .page-head h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #397afc;
+      letter-spacing: 2px;
+    }
+    .page-head p {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #8a9bbd;
+      letter-spacing: 1px;
+    }
+
+    .grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px 40px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    /* 独立编号（仅用于区分，不属于标题样式） */
+    .num {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #8a9bbd;
+      background: #e8eefb;
+      border: 1px dashed #b8c6e8;
+      user-select: none;
+    }
+
+    /* 标题行：无白色背景 */
+    .title-row {
+      position: relative;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 6px 4px;
+      cursor: pointer;
+    }
+
+    .title-row .title {
+      position: relative;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.4;
+      white-space: nowrap;
+      transition: all .4s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .title-row .subtitle {
+      font-size: 13px;
+      color: #a8b5d0;
+      font-weight: 400;
+      white-space: nowrap;
+      transition: color .35s ease;
+    }
+
+    /* ============ 1. 多彩流光文字（默认流动，hover 加速发光） ============ */
+    .t1 .title {
+      background-image: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff, #6fa3ff, #397afc, #5b8def, #397afc);
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: flow1 5s linear infinite;
+      filter: drop-shadow(0 0 0 transparent);
+    }
+    @keyframes flow1 {
+      0% { background-position: 0 0; }
+      100% { background-position: 300% 0; }
+    }
+    .t1:hover .title {
+      animation-duration: 1.2s;
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .6));
+    }
+    .t1:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 2. 渐变文字 + 流光下划线 ============ */
+    .t2 .title {
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff, #8fb9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff, #6fa3ff, #397afc);
+      background-size: 300% 100%;
+      border-radius: 1px;
+      transform: scaleX(.2);
+      transform-origin: left center;
+      opacity: .5;
+      animation: flow2 3s linear infinite;
+      transition: transform .4s cubic-bezier(.2,.7,.2,1), opacity .4s ease;
+      pointer-events: none;
+    }
+    @keyframes flow2 {
+      0% { background-position: 0 0; }
+      100% { background-position: 300% 0; }
+    }
+    .t2:hover .title {
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t2:hover::after {
+      transform: scaleX(1);
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(57, 122, 252, .5);
+      animation-duration: 1s;
+    }
+    .t2:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 3. 霓虹描边 + 呼吸光晕 ============ */
+    .t3 .title {
+      color: #397afc;
+      text-shadow:
+        0 0 4px rgba(57, 122, 252, .3),
+        0 0 8px rgba(57, 122, 252, .2);
+      animation: neon3 2.5s ease-in-out infinite;
+    }
+    @keyframes neon3 {
+      0%, 100% { text-shadow: 0 0 4px rgba(57, 122, 252, .3), 0 0 8px rgba(57, 122, 252, .2); }
+      50% { text-shadow: 0 0 8px rgba(57, 122, 252, .6), 0 0 16px rgba(57, 122, 252, .4), 0 0 24px rgba(111, 163, 255, .3); }
+    }
+    .t3:hover .title {
+      color: transparent;
+      -webkit-text-stroke: 1px #397afc;
+      text-shadow:
+        0 0 10px rgba(57, 122, 252, .8),
+        0 0 20px rgba(57, 122, 252, .6),
+        0 0 30px rgba(111, 163, 255, .4);
+      animation: none;
+    }
+    .t3:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 4. 三色渐变 + 底部光斑 ============ */
+    .t4 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #5b8def 40%, #8fb9ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t4::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #397afc;
+      box-shadow: 0 0 12px #397afc;
+      transform: translateX(-50%) scale(1);
+      transition: width .5s cubic-bezier(.2,.7,.2,1), border-radius .5s ease;
+    }
+    .t4:hover::after {
+      width: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff);
+      box-shadow: 0 0 16px rgba(57, 122, 252, .6);
+    }
+    .t4:hover .title {
+      filter: drop-shadow(0 4px 10px rgba(57, 122, 252, .4));
+    }
+    .t4:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 5. 渐变文字 + 旋转光环 ============ */
+    .t5 {
+      isolation: isolate;
+    }
+    .t5 .title {
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff, #8fb9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t5::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      right: calc(100% + 8px);
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #397afc;
+      box-shadow: 0 0 12px #397afc;
+      transform: translateY(-50%);
+      animation: orbit5 3s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 2;
+    }
+    @keyframes orbit5 {
+      0%   { left: -8px;   right: calc(100% + 8px); background: #397afc; box-shadow: 0 0 12px #397afc; }
+      25%  { left: 50%;    right: calc(100% + 8px); background: #6fa3ff; box-shadow: 0 0 12px #6fa3ff; }
+      50%  { left: 50%;    right: -8px;  background: #8fb9ff; box-shadow: 0 0 12px #8fb9ff; }
+      75%  { left: -8px;   right: 50%;   background: #5b8def; box-shadow: 0 0 12px #5b8def; }
+      100% { left: -8px;   right: calc(100% + 8px); background: #397afc; box-shadow: 0 0 12px #397afc; }
+    }
+    .t5:hover .title {
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t5:hover::before {
+      animation-duration: 1s;
+    }
+    .t5:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 6. 双层文字错位 + 流动 ============ */
+    .t6 .title {
+      background-image: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff, #397afc);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: flow6 3s linear infinite;
+    }
+    @keyframes flow6 {
+      0% { background-position: 0 0; }
+      100% { background-position: 200% 0; }
+    }
+    .t6 .title::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(111, 163, 255, .3);
+      opacity: .4;
+      transform: translate(2px, 2px);
+      transition: opacity .35s ease, transform .35s ease, -webkit-text-stroke .35s ease;
+      pointer-events: none;
+    }
+    .t6:hover .title {
+      animation-duration: 1s;
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+    }
+    .t6:hover .title::before {
+      opacity: .9;
+      transform: translate(4px, 4px);
+      -webkit-text-stroke: 1px #6fa3ff;
+    }
+    .t6:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 7. 玻璃拟态边框 + 渐变 ============ */
+    .t7 .title {
+      padding: 6px 16px;
+      border-radius: 10px;
+      color: transparent;
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      border: 1.5px solid rgba(57, 122, 252, .25);
+      backdrop-filter: blur(4px);
+      box-shadow:
+        0 4px 16px rgba(57, 122, 252, .1),
+        inset 0 1px 0 rgba(255, 255, 255, .4);
+      transition: all .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .t7:hover .title {
+      border-color: rgba(57, 122, 252, .6);
+      box-shadow:
+        0 8px 24px rgba(57, 122, 252, .3),
+        inset 0 1px 0 rgba(255, 255, 255, .6);
+      transform: translateY(-2px);
+      background-image: linear-gradient(135deg, #2a5fd0, #5b8def, #8fb9ff);
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .4));
+    }
+    .t7:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 8. 多彩光点装饰 + 渐变 ============ */
+    .t8 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #6fa3ff 50%, #8fb9ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-left: 18px;
+    }
+    .t8 .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #397afc;
+      box-shadow:
+        0 0 8px #397afc,
+        0 -10px 0 #6fa3ff,
+        0 -10px 8px #6fa3ff,
+        0 10px 0 #8fb9ff,
+        0 10px 8px #8fb9ff;
+      transform: translateY(-50%);
+      animation: bounce8 1.5s ease-in-out infinite;
+    }
+    @keyframes bounce8 {
+      0%, 100% { transform: translateY(-50%) scale(1); }
+      50% { transform: translateY(-50%) scale(1.3); }
+    }
+    .t8:hover .title {
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t8:hover .title::before {
+      animation-duration: .5s;
+      box-shadow:
+        0 0 12px #397afc,
+        0 -12px 0 #6fa3ff,
+        0 -12px 12px #6fa3ff,
+        0 12px 0 #8fb9ff,
+        0 12px 12px #8fb9ff;
+    }
+    .t8:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 9. 立体3D投影 + 渐变 ============ */
+    .t9 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #6fa3ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(2px 2px 0 #c5d4f5) drop-shadow(3px 3px 0 #b8c6e8);
+      transition: all .4s cubic-bezier(.2,.7,.2,1);
+    }
+    .t9:hover .title {
+      filter:
+        drop-shadow(3px 3px 0 #6fa3ff)
+        drop-shadow(5px 5px 0 #8fb9ff)
+        drop-shadow(7px 7px 12px rgba(57, 122, 252, .4));
+      transform: translate(-3px, -3px);
+    }
+    .t9:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 10. 流光描边 + 闪烁 ============ */
+    .t10 .title {
+      color: #397afc;
+      -webkit-text-stroke: 0 transparent;
+      position: relative;
+    }
+    .t10 .title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-image: linear-gradient(90deg, transparent 30%, #6fa3ff 50%, transparent 70%);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer10 3s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmer10 {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .t10:hover .title {
+      color: transparent;
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+    .t10:hover .title::after {
+      animation-duration: .8s;
+      background-image: linear-gradient(90deg, transparent 20%, #fff 50%, transparent 80%);
+    }
+    .t10:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 11. 顶部彩色光带 + 渐变 ============ */
+    .t11 .title {
+      background-image: linear-gradient(135deg, #397afc, #5b8def, #8fb9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t11::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff, #6fa3ff, #397afc);
+      background-size: 200% 100%;
+      border-radius: 2px;
+      transform: scaleX(.3);
+      transform-origin: left center;
+      opacity: .5;
+      animation: flow11 3s linear infinite;
+      transition: transform .4s ease, opacity .4s ease;
+    }
+    @keyframes flow11 {
+      0% { background-position: 0 0; }
+      100% { background-position: 200% 0; }
+    }
+    .t11:hover::before {
+      transform: scaleX(1);
+      opacity: 1;
+      box-shadow: 0 0 12px rgba(57, 122, 252, .5);
+    }
+    .t11:hover .title {
+      filter: drop-shadow(0 4px 10px rgba(57, 122, 252, .4));
+    }
+    .t11:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 12. 副标题多彩圆点 ============ */
+    .t12 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #6fa3ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t12 .subtitle {
+      display: inline-flex;
+      align-items: center;
+    }
+    .t12 .subtitle::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-right: 6px;
+      background: linear-gradient(135deg, #397afc, #6fa3ff);
+      box-shadow: 0 0 0 2px rgba(57, 122, 252, .15);
+      animation: pulseDot12 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot12 {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(57, 122, 252, .15); transform: scale(1); }
+      50% { box-shadow: 0 0 0 6px rgba(57, 122, 252, .05), 0 0 10px rgba(57, 122, 252, .4); transform: scale(1.2); }
+    }
+    .t12:hover .title {
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+    }
+    .t12:hover .subtitle::before {
+      animation-duration: .6s;
+    }
+    .t12:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 13. 渐变文字 + 环绕光点 ============ */
+    .t13 {
+      isolation: isolate;
+    }
+    .t13 .title {
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff, #8fb9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .t13::before, .t13::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .t13::before {
+      background: #397afc;
+      box-shadow: 0 0 10px #397afc;
+      animation: orbit13a 4s linear infinite;
+    }
+    .t13::after {
+      background: #8fb9ff;
+      box-shadow: 0 0 10px #8fb9ff;
+      animation: orbit13b 4s linear infinite;
+    }
+    @keyframes orbit13a {
+      0%   { left: -12px; top: 50%; }
+      25%  { left: 50%; top: -6px; }
+      50%  { left: calc(100% + 12px); top: 50%; }
+      75%  { left: 50%; top: calc(100% + 6px); }
+      100% { left: -12px; top: 50%; }
+    }
+    @keyframes orbit13b {
+      0%   { left: calc(100% + 12px); top: 50%; }
+      25%  { left: 50%; top: calc(100% + 6px); }
+      50%  { left: -12px; top: 50%; }
+      75%  { left: 50%; top: -6px; }
+      100% { left: calc(100% + 12px); top: 50%; }
+    }
+    .t13:hover .title {
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t13:hover::before { animation-duration: 1s; }
+    .t13:hover::after { animation-duration: 1s; }
+    .t13:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 14. 左侧彩色竖条 + 渐变文字 ============ */
+    .t14 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #6fa3ff 50%, #8fb9ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-left: 16px;
+    }
+    .t14 .title::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10%;
+      width: 4px;
+      height: 80%;
+      border-radius: 2px;
+      background: linear-gradient(180deg, #397afc, #6fa3ff, #8fb9ff, #6fa3ff, #397afc);
+      background-size: 100% 200%;
+      animation: barFlow14 2.5s ease-in-out infinite;
+      box-shadow: 0 0 6px rgba(57, 122, 252, .4);
+    }
+    @keyframes barFlow14 {
+      0%, 100% { background-position: 0 0; }
+      50% { background-position: 0 200%; }
+    }
+    .t14:hover .title {
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t14:hover .title::before {
+      width: 6px;
+      box-shadow: 0 0 14px rgba(57, 122, 252, .7);
+      animation-duration: .8s;
+    }
+    .t14:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 15. 放大 + 多彩光晕 ============ */
+    .t15 .title {
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff, #8fb9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform .4s cubic-bezier(.2,.7,.2,1.2), filter .4s ease, letter-spacing .4s ease;
+      transform-origin: left center;
+    }
+    .t15:hover .title {
+      transform: scale(1.08);
+      letter-spacing: 3px;
+      filter:
+        drop-shadow(0 0 8px rgba(57, 122, 252, .6))
+        drop-shadow(0 0 16px rgba(111, 163, 255, .4))
+        drop-shadow(0 4px 8px rgba(57, 122, 252, .3));
+    }
+    .t15:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 16. 斜纹扫光 + 渐变 + 描边 ============ */
+    .t16 .title {
+      padding: 6px 14px;
+      border-radius: 6px;
+      overflow: hidden;
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      border: 1.5px solid rgba(57, 122, 252, .3);
+    }
+    .t16 .title::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -150%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(111, 163, 255, .4), rgba(143, 185, 255, .6), rgba(111, 163, 255, .4), transparent);
+      transform: skewX(-18deg);
+      transition: left .9s ease;
+      pointer-events: none;
+    }
+    .t16:hover .title::before { left: 150%; }
+    .t16:hover .title {
+      border-color: #397afc;
+      box-shadow: 0 0 0 3px rgba(57, 122, 252, .1), 0 6px 20px rgba(57, 122, 252, .25);
+      filter: drop-shadow(0 0 6px rgba(57, 122, 252, .4));
+    }
+    .t16:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 17. 双层错位 + 多彩描边 ============ */
+    .t17 .title {
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .t17 .title::before {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: transparent;
+      -webkit-text-stroke: 1px #8fb9ff;
+      opacity: .35;
+      transform: translate(3px, 3px);
+      transition: opacity .35s ease, transform .35s ease, -webkit-text-stroke .35s ease;
+      pointer-events: none;
+    }
+    .t17 .title::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(91, 141, 239, .4);
+      opacity: .25;
+      transform: translate(-3px, -3px);
+      transition: opacity .35s ease, transform .35s ease;
+      pointer-events: none;
+    }
+    .t17:hover .title {
+      transform: translate(-2px, -2px);
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+    }
+    .t17:hover .title::before {
+      opacity: .9;
+      transform: translate(5px, 5px);
+      -webkit-text-stroke: 1px #6fa3ff;
+    }
+    .t17:hover .title::after {
+      opacity: .5;
+      transform: translate(-5px, -5px);
+    }
+    .t17:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 18. 波浪下划线 + 渐变流动 ============ */
+    .t18 .title {
+      background-image: linear-gradient(90deg, #397afc, #6fa3ff, #8fb9ff, #6fa3ff, #397afc);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: flow18 4s linear infinite;
+    }
+    @keyframes flow18 {
+      0% { background-position: 0 0; }
+      100% { background-position: 200% 0; }
+    }
+    .t18::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 8px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 8'><path d='M0 4 Q 10 0 20 4 T 40 4' fill='none' stroke='%23397afc' stroke-width='1.5' stroke-linecap='round'/></svg>");
+      background-repeat: repeat-x;
+      background-size: 40px 8px;
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: opacity .3s ease, transform .5s cubic-bezier(.2,.8,.2,1.2);
+      pointer-events: none;
+    }
+    .t18:hover .title {
+      animation-duration: 1s;
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+    }
+    .t18:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .t18:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 19. 箭头滑入 + 渐变流光 ============ */
+    .t19 .title {
+      background-image: linear-gradient(90deg, #397afc 0%, #6fa3ff 50%, #8fb9ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding-left: 0;
+      transition: padding-left .35s ease, filter .35s ease;
+    }
+    .t19 .title::before {
+      content: "→";
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      font-size: 18px;
+      background-image: linear-gradient(135deg, #397afc, #6fa3ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      opacity: 0;
+      transform: translateY(-50%) translateX(-12px);
+      transition: opacity .35s ease, transform .35s ease, left .35s ease;
+    }
+    .t19:hover .title {
+      padding-left: 22px;
+      filter: drop-shadow(0 0 8px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t19:hover .title::before {
+      opacity: 1;
+      left: 0;
+      transform: translateY(-50%) translateX(0);
+    }
+    .t19:hover .subtitle { color: #7b8fb3; }
+
+    /* ============ 20. 多彩光晕呼吸 + 渐变 ============ */
+    .t20 .title {
+      background-image: linear-gradient(135deg, #397afc 0%, #6fa3ff 50%, #8fb9ff 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 6px 14px;
+      border-radius: 8px;
+    }
+    .t20 .title::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(57, 122, 252, .25), transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(111, 163, 255, .25), transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(143, 185, 255, .2), transparent 50%);
+      opacity: .4;
+      transform: scale(.9);
+      transition: opacity .4s ease, transform .4s ease;
+      pointer-events: none;
+      z-index: -1;
+      animation: glow20 3s ease-in-out infinite;
+    }
+    @keyframes glow20 {
+      0%, 100% { opacity: .3; transform: scale(.95); }
+      50% { opacity: .6; transform: scale(1.05); }
+    }
+    .t20:hover .title {
+      filter: drop-shadow(0 0 10px rgba(57, 122, 252, .5));
+      letter-spacing: 1px;
+    }
+    .t20:hover .title::before {
+      opacity: 1;
+      transform: scale(1.1);
+      animation: glow20Hover 1s ease-in-out infinite;
+    }
+    @keyframes glow20Hover {
+      0%, 100% { opacity: .7; transform: scale(1.05); }
+      50% { opacity: 1; transform: scale(1.15); }
+    }
+    .t20:hover .subtitle { color: #7b8fb3; }
+  </style>
+</head>
+<body>
+  <div class="page-head">
+    <h1>首页模块标题特效</h1>
+    <p>背景 #f3f6fd · 主题色 #397afc · 鼠标滑入查看 20 种效果</p>
+  </div>
+
+  <div class="grid">
+    <div class="row"><div class="num">1</div><div class="title-row t1"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">2</div><div class="title-row t2"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">3</div><div class="title-row t3"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">4</div><div class="title-row t4"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">5</div><div class="title-row t5"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">6</div><div class="title-row t6"><span class="title" data-text="办公用品111">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">7</div><div class="title-row t7"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">8</div><div class="title-row t8"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">9</div><div class="title-row t9"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">10</div><div class="title-row t10"><span class="title" data-text="办公用品111">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">11</div><div class="title-row t11"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">12</div><div class="title-row t12"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">13</div><div class="title-row t13"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">14</div><div class="title-row t14"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">15</div><div class="title-row t15"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">16</div><div class="title-row t16"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">17</div><div class="title-row t17"><span class="title" data-text="办公用品111">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">18</div><div class="title-row t18"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">19</div><div class="title-row t19"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+    <div class="row"><div class="num">20</div><div class="title-row t20"><span class="title">办公用品111</span><span class="subtitle">优质办公用品</span></div></div>
+  </div>
+</body>
+</html>
